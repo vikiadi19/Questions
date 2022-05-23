@@ -1,23 +1,23 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        prodAll, op, flag, count = 1, [], False, 0
+        # lis = [[for i in nums] for j in range(len(nums))]
+        # for i in range(lis):
+        prod1, prod2, count = 1, 1, 0
         for i in nums:
-            if i!= 0:
-                prodAll *= i
-            if i == 0:
-                flag = True
+            prod1 *= i
+            if i != 0:
+                prod2 *= i
+            else:
                 count += 1
             
-        for i in nums:
-            if count >1:
-                op.append(0)
+            
+        fin = [1]*len(nums)
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                fin[i] = prod1//nums[i]
             else:
-                if flag == True:
-                    if i == 0:
-                        op.append(prodAll)
-                    else:
-                        op.append(0)
+                if count > 1:
+                    fin[i] = 0
                 else:
-                    op.append(prodAll//i)
-
-        return op
+                    fin[i] = prod2
+        return fin
