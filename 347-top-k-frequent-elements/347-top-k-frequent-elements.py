@@ -18,10 +18,15 @@ class Solution:
         for i in d.keys():
             l.append(i)
             
-        l.sort()
+        # l.sort()
         fin = []
-        while len(fin)<k:
-            x = l.pop()
-            fin.extend(d[x])
+        for i in range(len(nums), -1, -1):
             
+            if len(fin)<k:
+                if i in d:
+                    fin.extend(d[i])
+            else:
+                return fin
+                    
+
         return (fin)
