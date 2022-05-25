@@ -1,11 +1,20 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        d1, d2 = {}, {}
+        d1= {}
         if len(s)!=len(t):
             return False
         else:
             for i in range(len(s)):
                 d1[s[i]] = 1 + d1.get(s[i], 0)
-                d2[t[i]] = 1 + d2.get(t[i], 0)
-        return d1==d2
-        print(d1, d2)
+            
+            for j in range(len(t)):
+                if t[j] not in d1:
+                    return False
+                else:
+                    d1[t[j]] -= 1
+                    
+            for val in d1.values():
+                if val!=0:
+                    return False
+        
+            return True
