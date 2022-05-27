@@ -8,25 +8,16 @@ class Solution:
             else:
                 dic[i] += 1
         
-        d = {}
+        d = defaultdict(list)
         for i in dic.keys():
-            if dic[i] not in d:
-                d[dic[i]] = [i]
-            else:
-                d[dic[i]].append(i)
-        l = []
-        for i in d.keys():
-            l.append(i)
+            d[dic[i]].append(i)
             
-        # l.sort()
         fin = []
-        for i in range(len(nums), -1, -1):
+        while len(fin)<k:
+            fin.extend(d[max(d.keys())])
+            del d[max(d.keys())]
             
-            if len(fin)<k:
-                if i in d:
-                    fin.extend(d[i])
-            else:
-                return fin
-                    
-
         return (fin)
+        
+        
+       
