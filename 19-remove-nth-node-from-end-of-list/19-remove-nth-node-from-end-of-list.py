@@ -12,17 +12,16 @@ class Solution:
         p1, p2 = ListNode(), head
         dhead = p1
         p1.next = head
-        i = 1
-        while i<n:
+        for i in range(1, n):
             p2 = p2.next
-            i += 1
-
-        while p2.next != None:
+            
+        while p2.next is not None:
             p2 = p2.next
             p1 = p1.next
-            
+        
         p1.next = p1.next.next
         
         return dhead.next
+            
         
             
