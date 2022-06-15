@@ -5,41 +5,42 @@
 #         self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if head == None or head.next == None:
+        if head is None:
+            return head
+        if head.next is None:
             return head
         
         left = head
-        right = self.mid(head)
-        temp = right.next
-        right.next = None
-        right = temp
+        midpt = self.mid(head)
+        right = midpt.next
+        midpt.next = None
+        left_l = self.sortList(left)
+        right_l = self.sortList(right)
         
-        left = self.sortList(left)
-        right = self.sortList(right)
-        merge_both = self.merge(left, right)
+        merge_both = self.merge(left_l, right_l)
         
         return merge_both
     
-    def mid(self, node):
-        slow, fast = node, node
+    def mid(self, head):
+        slow = fast = head
         while fast.next != None and fast.next.next != None:
-            slow = slow.next
             fast = fast.next.next
+            slow = slow.next
+         
         return slow
     
     
-    def merge(self, left, right):
-        n = dhead = ListNode()
-        while left != None and right != None:
-            if left.val<right.val:
-                n.next = left
-                left = left.next
+    def merge(self, l, r):
+        nnode = nhead = ListNode()
+        while l!=None and r!=None:
+            if l.val<r.val:
+                nnode.next = l
+                l = l.next
             else:
-                n.next = right
-                right = right.next
-            n = n.next
-        n.next = left or right
+                nnode.next = r
+                r = r.next
+            nnode = nnode.next
+        nnode.next = l or r
         
-        return dhead.next
-    
+        return nhead.next
         
