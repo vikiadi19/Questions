@@ -8,12 +8,14 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         if head is None:
             return
-        slow, fast = head, head.next
-        while slow != fast and fast != None and fast.next != None:
-            slow = slow.next
-            fast = fast.next.next
-        if slow ==fast:    
-            return True
+        p = head
+        hashset = set()
+        while p != None:
+            if p in hashset:
+                return True
+            else:
+                hashset.add(p)
+            p = p.next
         return False
     
             
