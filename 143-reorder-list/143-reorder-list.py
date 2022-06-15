@@ -8,44 +8,41 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        midpoint = self.mid(head)
-        mid_next = midpoint.next
-        midpoint.next = None
-        rhead = self.reverseList(mid_next)
-        node = dhead = ListNode()
-        p1, p2 = head, rhead
-        while p1 != None and p2 != None:
-            node.next = p1
-            node = node.next
+        midpt = self.mid(head)
+        rhead = midpt.next
+        midpt.next = None
+        
+        head and rhead
+        rvhead = self.reverse(rhead)
+        head and rvhead
+        p1, p2 = head, rvhead
+        newhead = temp = ListNode()
+        while p1!=None and p2!=None:
+            temp.next = p1
+            temp = temp.next
             p1 = p1.next
-            node.next = p2
-            node = node.next
+            temp.next = p2
+            temp = temp.next
             p2 = p2.next
-        node.next = p1 or p2
             
-        return dhead.next
+        temp.next = p1 or p2
         
+        return newhead.next
     
-    def mid(self, head):
-        p1, p2 = head, head
-        while p2.next != None and p2.next.next !=None:
-            p1 = p1.next
-            p2 = p2.next.next
-        
-        return p1
-    
-    def reverseList(self, head):
-        p, c = None, head
-        size = 0
-        while c is not None:
-            
-            size += 1
+    def reverse(self, node):
+        p, c = None, node
+        while c!=None:
             n = c.next
             c.next = p
             p = c
             c = n
             
         return p
+    
+    def mid(self, head):
+        slow = fast = head
+        while fast.next != None and fast.next.next != None:
+            fast = fast.next.next
+            slow = slow.next
             
-        
-        
+        return slow
