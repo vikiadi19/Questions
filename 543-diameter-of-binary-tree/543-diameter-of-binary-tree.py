@@ -4,22 +4,28 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+class DiaPair:
+    def __init__(self, ht = -1, dia = 0):
+        self.ht = ht
+        self.dia = dia
+        
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        res = [0]
-        
-        def dfs(root):
+        def dia(root):
             if root == None:
-                return -1
-            
-            left = dfs(root.left)
-            right = dfs(root.right)
-            diameter = left + right + 2
-            res[0] = max(res[0], diameter)
-            height = max(left, right)+ 1
-            
-            return height
+                bp = DiaPair()
+                return bp
+
+            lp = dia(root.left)
+            rp = dia(root.right)
+
+            mp = DiaPair()
+            mp.ht = max(lp.ht, rp.ht)+1
+            mp.dia = max((lp.ht+rp.ht+2), lp.dia, rp.dia)
+
+            return mp
         
-        dfs(root)
-        return res[0]
+        res = dia(root)
+        return res.dia
+    
         
