@@ -1,12 +1,12 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        d = {}
+        d = {} # {value:index}
         for i in range(len(nums)):
-            if target - nums[i] not in d.keys():
-                d[nums[i]] = i
+            if target-nums[i] in d:
+                return [i, d[target-nums[i]]]
             else:
-                return [i, d[target-nums[i]] ]
+                d[nums[i]] = i
                 
                 
                 
-    # {2:0, 2:1, }
+            
