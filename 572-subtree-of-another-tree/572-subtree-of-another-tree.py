@@ -11,7 +11,8 @@ class Solution:
         if root == None:
             return False
         
-        if self.sameTree(root, subRoot) == True:
+        if root.val == subRoot.val:
+            if self.sameTree(root, subRoot) == True:
                 return True
         
         x = self.isSubtree(root.left, subRoot)
