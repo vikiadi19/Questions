@@ -1,9 +1,9 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        op = [1]*len(nums)
+        op = [0]*len(nums)
         prod = 1
         for i in range(len(nums)):
-            if i-1<0 or i-1>len(nums):
+            if i-1<0:
                 p = 1
             else:
                 p = nums[i-1]
