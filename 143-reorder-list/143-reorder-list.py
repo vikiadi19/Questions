@@ -8,41 +8,43 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        midpt = self.mid(head)
-        rhead = midpt.next
-        midpt.next = None
+        if head is None:
+            return None
         
-        head and rhead
-        rvhead = self.reverse(rhead)
-        head and rvhead
-        p1, p2 = head, rvhead
-        newhead = temp = ListNode()
-        while p1!=None and p2!=None:
-            temp.next = p1
-            temp = temp.next
+        midpt = self.mid(head)
+        right = midpt.next
+        midpt.next = None
+        # left = head
+        rhead = self.reverse(right)
+        p1, p2 = head, rhead
+        dhead = p3 = ListNode()
+        while p1!= None and p2!= None:
+            p3.next = p1
+            p3 = p3.next
             p1 = p1.next
-            temp.next = p2
-            temp = temp.next
+            p3.next = p2
+            p3 = p3.next
+            
             p2 = p2.next
             
-        temp.next = p1 or p2
-        
-        return newhead.next
-    
-    def reverse(self, node):
-        p, c = None, node
-        while c!=None:
-            n = c.next
-            c.next = p
-            p = c
-            c = n
+        p3.next = p1 or p2
             
-        return p
+        return dhead.next
     
     def mid(self, head):
         slow = fast = head
         while fast.next != None and fast.next.next != None:
             fast = fast.next.next
             slow = slow.next
-            
         return slow
+    
+    
+    def reverse(self, head):
+        p, c = None, head
+        while c is not None:
+            n = c.next
+            c.next = p
+            p = c
+            c = n
+            
+        return p
