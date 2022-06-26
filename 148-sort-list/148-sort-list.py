@@ -10,16 +10,15 @@ class Solution:
         if head.next is None:
             return head
         
-        left = head
         midpt = self.mid(head)
+        left = head
         right = midpt.next
         midpt.next = None
-        left_l = self.sortList(left)
-        right_l = self.sortList(right)
+        leftL = self.sortList(left)
+        rightL = self.sortList(right)
         
-        merge_both = self.merge(left_l, right_l)
-        
-        return merge_both
+        mergeL = self.merge(leftL, rightL)
+        return mergeL
     
     def mid(self, head):
         slow = fast = head
