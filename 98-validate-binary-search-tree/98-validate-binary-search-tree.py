@@ -11,17 +11,11 @@ class Solution:
             if node == None:
                 return True
             
-            if node.val <= left or node.val >= right:
+            if not (node.val > left and node.val < right):
                 return False
             
-            lt = helper(node.left, left, node.val)
-            rt = helper(node.right, node.val, right)
+            val = (helper(node.left, left, node.val) and helper(node.right, node.val, right))
+            return val
             
-            return lt and rt
-            
-            
-        return helper(root, -math.inf, math.inf)
-        
-        
-            
-        
+        res = helper(root, -math.inf, math.inf)
+        return res
