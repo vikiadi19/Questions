@@ -1,27 +1,26 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        profit = -math.inf
-        # left, right = 0, 1
-        # while left < len(prices)-1:
-        #     if right >= len(prices):
-        #         left += 1
-        #         right = left+1
-        #     if prices[right] < prices[left]:
-        #         right += 1
-        #         left += 1
-        #     elif prices[left] < prices[right]:
-        #         profit = max(profit, prices[right]-prices[left])
-        #         right += 1
-        # if profit == -math.inf:
-        #     profit = 0
-        # return profit
-        l, r, maxP = 0, 1, 0
+        l, r = 0,1
+        maxP = 0
         while r<len(prices):
-            if prices[l]>prices[r]:
+            p = prices[r]-prices[l]
+            if p<0:
                 l = r
-            else:
-                profit = prices[r]-prices[l]
-                maxP = max(maxP, profit)
-            r+=1
-            
+                r+=1
+            elif p>=0:
+                maxP = max(maxP, p)
+                r+=1
+        
         return maxP
+        # buy, l = math.inf,  0
+        # sell, r = -math.inf, 1
+        # while r<len(prices):
+        #     if l<r:
+        #         buy = min(buy, prices[l])
+        #         sell = max(sell, prices[r])
+        #     l+=1
+        #     r+=1
+        # maxP = sell-buy
+        # if maxP>0:
+        #     return maxP
+        # return 0
