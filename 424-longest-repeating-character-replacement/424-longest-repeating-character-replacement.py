@@ -4,15 +4,13 @@ class Solution:
         # for i in range(len(s)):
         #     d[s[i]] = 1 + d.get(s[i], 0)
         # max_key = max(d, key=d.get)
-        l, r, res = 0, 0, 0
-        count = {}
-        while r<len(s):
-            count[s[r]] = 1 + count.get(s[r],0)
+        d = {}
+        l, maxL = 0, 0
+        for r in range(len(s)):
+            d[s[r]] = 1 + d.get(s[r], 0) 
+            while (r-l+1)-max(d.values())>k:
+                d[s[l]] -= 1
+                l += 1
+            maxL = max(maxL, r-l+1)
+        return maxL
             
-            while (r-l+1)-max(count.values())>k:
-                count[s[l]]-=1
-                l+=1
-            
-            res = max(res, r-l+1)
-            r+=1
-        return res
