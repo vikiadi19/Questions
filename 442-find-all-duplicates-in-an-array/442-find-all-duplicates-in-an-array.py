@@ -1,9 +1,12 @@
 class Solution:
     def findDuplicates(self, nums: List[int]) -> List[int]:
-        op = []
+        dnum, res = {}, []
         for i in nums:
-            idx = abs(i)-1
-            if nums[idx] < 0:
-                op.append(abs(i))
-            nums[idx] *= -1
-        return op
+            if i in dnum:
+                dnum[i] +=1
+            else:
+                dnum[i] = 1
+        for i, j in dnum.items():
+            if j>1:
+                res.append(i)
+        return res
