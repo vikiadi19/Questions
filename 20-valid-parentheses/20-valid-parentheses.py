@@ -9,9 +9,7 @@ class Solution:
             if i in d.values():
                 stack.append(i)
             else:
-                if len(stack) == 0:
-                    return False
-                if d[i] == stack[-1]:
+                if len(stack) != 0 and d[i] == stack[-1]:
                     stack.pop()
                 else:
                     return False
