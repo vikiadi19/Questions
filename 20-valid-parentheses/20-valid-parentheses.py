@@ -1,22 +1,20 @@
 from collections import deque
 class Solution:
     def isValid(self, s: str) -> bool:
-        # chars = {"(":")", "[":"]", "{":"}"}
-        chars = {")":"(", "]":"[", "}":"{"}
+        if len(s)%2 != 0:
+            return False
         stack = []
-        # stack.append(s[0])
+        d = {")":"(", "}":"{", "]":"["}
         for i in s:
-            stack.append(i)
-            if stack[-1] in chars.values():
-                pass
-            
-            elif len(stack)>1 and chars[stack[-1]] == stack[-2]:
-                stack.pop()
-                stack.pop()
+            if i in d.values():
+                stack.append(i)
             else:
-                return False
+                if len(stack) == 0:
+                    return False
+                if d[i] == stack[-1]:
+                    stack.pop()
+                else:
+                    return False
+                    
+        return len(stack) == 0
             
-        if len(stack) == 0:
-            return True
-            
-            # stack.append(i):
