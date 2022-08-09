@@ -26,9 +26,21 @@ class Solution:
     
     #sol2 - use sort to use sorted word as key for dictionary
     #       
-        d = defaultdict(list)
-        for word in strs:
-            key = tuple(sorted(word))
-            d[key].append(word)
-            
+        # for i in range(len(strs)):
+        d = {}
+        
+        for i in strs:
+            count = [0]*26
+            for j in i:
+                count[ord(j)-ord('a')] += 1
+            if tuple(count) not in d:
+                d[tuple(count)] = [i]
+            else:
+                d[tuple(count)].append(i)
+                
+        # print(d)
         return d.values()
+
+    
+                
+        
