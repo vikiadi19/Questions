@@ -3,16 +3,10 @@ class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         d, op = {}, []
         for i in nums:
-            if i in d:
-                d[i] += 1
-            else:
-                d[i] = 1
-        d2 = {}
+            d[i] = 1 + d.get(i, 0)
+        d2 = defaultdict(list)
         for key, value in d.items():
-            if value not in d2:
-                d2[value] = [key]
-            else:
-                d2[value].append(key)
+            d2[value].append(key)
                 
         while len(op)<k:   
             maxi = max(d2.keys())
