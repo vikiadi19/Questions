@@ -1,24 +1,26 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        all_prod = 1
-        op, d = [], {}
-        for i in nums:
-            if i != 0:
-                all_prod *= i
-            d[i] = 1+d.get(i, 0)
+        pre, post = [], []
+        prod = 1
+        for i in range(len(nums)):
+            if i == 0:
+                prod = 1
+            else:
+                prod *= nums[i-1]
+            pre.append(prod)
             
-        if 0 in d and d[0] > 1:
-            op = [0]*len(nums)
-        elif 0 in d and d[0] == 1:
-            for i in nums:
-                if i == 0:
-                    op.append(all_prod)
-                else:
-                    op.append(0)
-        else:
-            for i in nums:
-                op.append(all_prod//i)
-                
+        prod = 1    
+        for i in range(len(nums)-1, -1, -1):
+            if i+1 > len(nums)-1:
+                prod = 1
+            else:
+                prod *= nums[i+1]
+            post.append(prod)
+
+        op = []
+        post = post[::-1]
+        for i in range(len(nums)):
+            op.append(pre[i]*post[i])
+            
         return op
-            
 
