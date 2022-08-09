@@ -1,23 +1,27 @@
 from queue import PriorityQueue
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        dic = {}
+        d, op = {}, []
         for i in nums:
-            dic[i] = 1 + dic.get(i, 0)
+            if i in d:
+                d[i] += 1
+            else:
+                d[i] = 1
+        d2 = {}
+        for key, value in d.items():
+            if value not in d2:
+                d2[value] = [key]
+            else:
+                d2[value].append(key)
+                
+        while len(op)<k:   
+            maxi = max(d2.keys())
+            op.extend(d2[maxi])
+            del d2[maxi]
             
-        freq = defaultdict(list)
-        for num, val in dic.items():
-            freq[val].append(num)
+        return op
             
-        freqs = list(freq.keys())
-        freqs.sort()
-        output = []
-        while len(output)<k:
-            f = freqs.pop()
-            output.extend(freq[f])
-            
-        return output
-            
+
         
         
         
